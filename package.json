@@ -1,0 +1,49 @@
+{
+  "name": "react-playground",
+  "version": "0.0.1",
+  "description": "A place to play around with React and have a sense of source control",
+  "main": "playground",
+  "scripts": {
+    "playground": "webpack-dev-server --config playground/webpack.config.js --content-base playground"
+  },
+  "authors": [
+    "Fernando Marcheselli"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.0.12",
+    "babel-core": "^5.0.12",
+    "babel-loader": "^5.0.0",
+    "bundle-loader": "^0.5.2",
+    "css-loader": "^0.16.0",
+    "events": "1.0.2",
+    "expect": "^1.1.0",
+    "jsxhint": "^0.12.1",
+    "less-loader": "2.2.x",
+    "marked": "0.3.3",
+    "pygmentize-bundled": "^2.3.0",
+    "react": "0.13.x",
+    "rf-changelog": "^0.4.0",
+    "rx": "2.3.18",
+    "style-loader": "0.12.x",
+    "webpack": "^1.4.13",
+    "webpack-dev-server": "^1.6.6"
+  },
+  "peerDependencies": {
+    "react": "0.13.x",
+    "react-router": "0.13.x"
+  },
+  "dependencies": {
+    "object-assign": "^2.0.0",
+    "qs": "2.4.1"
+  },
+  "tags": [
+    "react",
+    "router"
+  ],
+  "keywords": [
+    "react",
+    "react-component",
+    "playground"
+  ]
+}
