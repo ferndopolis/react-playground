@@ -39,18 +39,23 @@ class Image extends Component {
             src: '',
             opacity: 0
         };
-        this.loadImage = () => this.setState({
+    }
+
+    loadImage() {
+        this.setState({
             src: this.props.src,
             opacity: 1
         })
     }
 
-
     componentDidMount() {
-       //var img = new Image()
        var img = document.createElement('img')
        img.src = this.props.src
-       img.addEventListener('load', this.loadImage)
+       img.addEventListener('load', this.loadImage.bind(this))
+    }
+
+    componentDidUnmount(){
+        this.img.removeEventListener('load', this.loadImage.bind(this))
     }
 
     render() {
