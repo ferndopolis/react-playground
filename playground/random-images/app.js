@@ -8,7 +8,7 @@ class App extends Component {
         return (
             <div className="container">
             <UnsplashImage title='Arte' width='500' height='200' />
-            <UnsplashImage title='Arte' width='500' height='200' />
+            <UnsplashImage title='Arte' width='300' height='200' />
             <UnsplashImage title='ASF' width='80' height='90' />
             </div>
         );
@@ -32,12 +32,32 @@ class UnsplashImage extends Component {
 
 class Image extends Component {
     // image component responsible for loading the image on DOM once image had been recieved
+    //
+    constructor(props) {
+        super(props);
+        this.state = {
+            src: '',
+            opacity: 0
+        };
+        this.loadImage = () => this.setState({
+            src: this.props.src,
+            opacity: 1
+        })
+    }
+
+
+    componentDidMount() {
+       //var img = new Image()
+       var img = document.createElement('img')
+       img.src = this.props.src
+       img.addEventListener('load', this.loadImage)
+    }
 
     render() {
         return (
-            <div className="random-float image">
+            <div style={{opacity: this.state.opacity}} className="random-float image">
                 <h3>{this.props.title}</h3>
-                <img src={this.props.src} />
+                <img src={this.state.src} />
             </div>
         );
     }
