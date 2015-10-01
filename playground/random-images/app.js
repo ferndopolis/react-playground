@@ -1,24 +1,24 @@
 require("./app.less");
 
-import React from 'react';
+import React, {Component} from 'react';
 
-var App = React.createClass({
-
-    contextTypes: {
-        router: React.PropTypes.func
-    },
+class App extends Component {
 
     render() {
         return (
             <div className="container">
             <Image title='Arte' width='500' height='200' />
-            <Image title='Fotos' width='100' height='250' />
+            <Image title='Arte' width='500' height='200' />
+            <Image title='ASF' width='800' height='900' />
             </div>
         );
     }
-});
+}
 
-var Image = React.createClass({
+class Image extends Component {
+    componentWillMount() {
+        console.log('image mounted to dom: ' + this)
+    }
     render() {
         return (
             <div className="random-float image">
@@ -27,7 +27,7 @@ var Image = React.createClass({
             </div>
         );
     }
-});
+}
 
 
 React.render(<App/>, document.getElementById('example'));
