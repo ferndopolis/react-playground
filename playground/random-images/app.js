@@ -7,23 +7,37 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-            <Image title='Arte' width='500' height='200' />
-            <Image title='Arte' width='500' height='200' />
-            <Image title='ASF' width='800' height='900' />
+            <UnsplashImage title='Arte' width='500' height='200' />
+            <UnsplashImage title='Arte' width='500' height='200' />
+            <UnsplashImage title='ASF' width='80' height='90' />
             </div>
         );
     }
 }
 
-class Image extends Component {
+
+class UnsplashImage extends Component {
+
     componentWillMount() {
-        console.log('image mounted to dom: ' + this)
+        this.src = "https://unsplash.it/" + this.props.width + "/" + this.props.height + "/?random"
     }
+
+    render() {
+        return (
+            <Image title={this.props.title} src={this.src} />
+        )
+    }
+}
+
+
+class Image extends Component {
+    // image component responsible for loading the image on DOM once image had been recieved
+
     render() {
         return (
             <div className="random-float image">
-            <h3>{this.props.title}</h3>
-            <img src={ "https://unsplash.it/" + this.props.width + "/" + this.props.height + "/?random"} />
+                <h3>{this.props.title}</h3>
+                <img src={this.props.src} />
             </div>
         );
     }
