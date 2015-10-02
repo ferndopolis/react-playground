@@ -1,7 +1,40 @@
+.translate(@x; @y) {
+  -webkit-transform: translate(@x, @y);
+  -ms-transform: translate(@x, @y); // IE9 only
+  transform: translate(@x, @y);
+}
+
 .container {
   height: 100vh;
   width: 100vw;
   position: relative;
 }
-.image {
+
+.centered {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  .translate(-50%, -50%);
+  max-height: 90%;
+  max-width: 80%;
+}
+
+.left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  .translate(0, -50%);
+}
+
+.right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  .translate(0, -50%);
+}
+
+.image-title {
+  position: absolute;
+  left: 100px;
+  bottom: 100px;
 }

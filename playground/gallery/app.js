@@ -45,17 +45,17 @@ class Gallery extends Component {
         var images = []
         this.props.images.forEach( (image) => {
             images.push(
-                <div className="centered">
-                    <h3>{image.title}</h3>
+                <div className="image-container">
+                    <h3 className="image-title">{image.title}</h3>
                     <Image src={image.src} onImageLoaded={self.handleImageLoaded.bind(self)}/>
                 </div>
             )
         })
         return (
             <div>
-                <i className="fa fa-chevron-left"></i>
+                <i className="fa fa-chevron-left left"></i>
                 <div className="images-container">{ images }</div>
-                <i className="fa fa-chevron-right"></i>
+                <i className="fa fa-chevron-right right"></i>
             </div>
         )
     }
@@ -88,7 +88,7 @@ class Image extends Component {
 
     render() {
         return (
-            <img src={this.state.src} />
+            <img className="centered" src={this.state.src} />
         );
     }
 }
