@@ -1,6 +1,7 @@
 require("./app.less")
 require("font-awesome-webpack")
 
+import classnames from 'classnames'
 import React, {Component} from 'react'
 
 class App extends Component {
@@ -40,12 +41,22 @@ class Gallery extends Component {
         console.log('image loaded');
     }
 
+    isActive() {
+        return true
+    }
+
     render() {
         var self = this
         var images = []
+
+        var classes = classnames(
+            'image-container',
+            { 'active': this.isActive() }
+        )
+
         this.props.images.forEach( (image) => {
             images.push(
-                <div className="image-container">
+                <div className={classes}>
                     <h3 className="image-title">{image.title}</h3>
                     <Image src={image.src} onImageLoaded={self.handleImageLoaded.bind(self)}/>
                 </div>
