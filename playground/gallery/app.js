@@ -1,6 +1,7 @@
-require("./app.less");
+require("./app.less")
+require("font-awesome-webpack")
 
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 
 class App extends Component {
     constructor () {
