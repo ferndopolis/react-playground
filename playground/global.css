@@ -22,4 +22,7 @@ a.active {
 
 .breadcrumbs {
   position: absolute;
+  z-index: 100;
+  margin: 0 0 0 5px;
+  font-size: 20px;
 }
