@@ -8,8 +8,8 @@ class App extends Component {
         return (
             <div className="container">
             <UnsplashImage title='Arte' width='500' height='200' />
-            <UnsplashImage title='Arte' width='300' height='200' />
-            <UnsplashImage title='ASF' width='80' height='90' />
+            <UnsplashImage title='Arte' width='300' height='300' />
+            <UnsplashImage title='Arte' width='80' height='90' />
             </div>
         );
     }
@@ -42,7 +42,6 @@ class RandomImage extends Component {
     }
 
     placeImage(loaded) {
-        console.log('place image');
         if (! loaded) { return };
 
         var height = React.findDOMNode(this).offsetHeight;
@@ -78,7 +77,6 @@ class Image extends Component {
     }
 
     loadImage() {
-        console.log('handle loaded ' + this.props.src);
         this.setState({
             src: this.props.src
         })
