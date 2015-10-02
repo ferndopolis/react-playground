@@ -3,29 +3,26 @@ require("./app.less");
 import React, {Component} from 'react';
 
 class App extends Component {
+    constructor () {
+        super();
+        this.images = [
+            { title: 'Arte', width: '500', height: '200' },
+            { title: 'Collection', width: '300', height: '300'},
+            { title: 'Editorial', width: '240', height: '360'}
+        ];
+    }
 
     render() {
+        var randomImages = [];
+        this.images.forEach( (image) => {
+            var imageSrc = "https://unsplash.it/" + image.width + "/" + image.height + "/?random";
+            randomImages.push(<RandomImage title={image.title} src={imageSrc} />);
+        });
         return (
             <div className="container">
-            <UnsplashImage title='Arte' width='500' height='200' />
-            <UnsplashImage title='Arte' width='300' height='300' />
-            <UnsplashImage title='Arte' width='80' height='90' />
+                {randomImages}
             </div>
         );
-    }
-}
-
-
-class UnsplashImage extends Component {
-
-    componentWillMount() {
-        this.src = "https://unsplash.it/" + this.props.width + "/" + this.props.height + "/?random"
-    }
-
-    render() {
-        return (
-            <RandomImage title={this.props.title} src={this.src} />
-        )
     }
 }
 
