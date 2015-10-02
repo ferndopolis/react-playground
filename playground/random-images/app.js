@@ -24,30 +24,26 @@ class UnsplashImage extends Component {
 
     render() {
         return (
-            <Image title={this.props.title} src={this.src} />
+            <RandomImage title={this.props.title} src={this.src} />
         )
     }
 }
 
-
-class Image extends Component {
+class RandomImage extends Component {
     // image component responsible for loading the image on DOM once image had been recieved
     //
     constructor(props) {
         super(props);
         this.state = {
-            src: '',
             opacity: 0,
             left: 0,
-            top: 0,
-            loaded: false
+            top: 0
         };
     }
 
-    loadImage() {
-        this.setState({
-            src: this.props.src,
-        })
+    placeImage(loaded) {
+        console.log('place image');
+        if (! loaded) { return };
 
         var height = React.findDOMNode(this).offsetHeight;
         var width = React.findDOMNode(this).offsetWidth;
@@ -61,11 +57,38 @@ class Image extends Component {
         });
     }
 
+
+    render() {
+        return (
+            <div style={{top: this.state.top, left: this.state.left, opacity: this.state.opacity}}
+                 className="random-float image">
+                <h3>{this.props.title}</h3>
+                <Image src={this.props.src} onImageLoaded={this.placeImage.bind(this)}/>
+            </div>
+        );
+    }
+}
+
+class Image extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            src: '',
+        }
+    }
+
+    loadImage() {
+        console.log('handle loaded ' + this.props.src);
+        this.setState({
+            src: this.props.src
+        })
+        this.props.onImageLoaded(true);
+    }
+
     componentDidMount() {
        var img = document.createElement('img')
        img.src = this.props.src
        img.addEventListener('load', this.loadImage.bind(this))
-
     }
 
     componentDidUnmount(){
@@ -74,11 +97,7 @@ class Image extends Component {
 
     render() {
         return (
-            <div style={{top: this.state.top, left: this.state.left, opacity: this.state.opacity}}
-                 className="random-float image">
-                <h3>{this.props.title}</h3>
-                <img src={this.state.src} />
-            </div>
+            <img src={this.state.src} />
         );
     }
 }
