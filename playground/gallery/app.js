@@ -44,12 +44,12 @@ class Gallery extends Component {
 
     }
 
-    hasLowerBound() {
+    hasPrevItem() {
         return this.state.currentImg > 0
     }
 
     handleLeftClick () {
-        if ( this.hasLowerBound() ) {
+        if ( this.hasPrevItem() ) {
             this.setState({
                 currentImg: this.state.currentImg - 1
             })
@@ -60,12 +60,12 @@ class Gallery extends Component {
         }
     }
 
-    hasUpperBound() {
+    hasNextItem() {
         return this.state.currentImg < this.galleryLength() - 1
     }
 
     handleRightClick () {
-        if ( this.hasUpperBound() ) {
+        if ( this.hasNextItem() ) {
             this.setState({ currentImg: this.state.currentImg + 1 })
         } else {
             // has hit the upper limit
