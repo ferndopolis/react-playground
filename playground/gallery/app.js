@@ -58,8 +58,8 @@ class Gallery extends Component {
             images.push(
                 <div className={classes}>
                     <h3 className="image-title">{image.title}</h3>
-                    <Image src={image.src} onImageLoaded={self.handleImageLoaded.bind(self)}/>
-                </div>
+                    <img src={image.src} />
+                </li>
             )
         })
         return (
@@ -69,38 +69,6 @@ class Gallery extends Component {
                 <i className="fa fa-chevron-right right"></i>
             </div>
         )
-    }
-}
-
-class Image extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            src: '',
-        }
-    }
-
-    loadImage() {
-        this.setState({
-            src: this.props.src
-        })
-        this.props.onImageLoaded(true);
-    }
-
-    componentDidMount() {
-       var img = document.createElement('img')
-       img.src = this.props.src
-       img.addEventListener('load', this.loadImage.bind(this))
-    }
-
-    componentDidUnmount(){
-        this.img.removeEventListener('load', this.loadImage.bind(this))
-    }
-
-    render() {
-        return (
-            <img className="centered" src={this.state.src} />
-        );
     }
 }
 
