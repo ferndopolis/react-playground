@@ -34,39 +34,59 @@ class Gallery extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentImg: 0
         }
     }
 
-    handleImageLoaded () {
-        console.log('image loaded');
+    handleLeftClick () {
+        this.setState({
+            currentImg: this.state.currentImg - 1
+        })
+        console.log('clicked')
     }
 
-    isActive() {
-        return true
+    handleRightClick () {
+        this.setState({
+            currentImg: this.state.currentImg + 1
+        })
+        console.log('right clicked: ', this.state.currentImg)
+    }
+
+    isActive(i) {
+        if ( i == this.state.currentImg ) {
+            return true
+        } else {
+            return false
+        }
     }
 
     render() {
         var self = this
         var images = []
 
-        var classes = classnames(
-            'image-container',
-            { 'active': this.isActive() }
-        )
 
-        this.props.images.forEach( (image) => {
+        this.props.images.forEach( (image, i) => {
+            var classes = classnames({
+                'image-container': true,
+                'active': this.isActive(i),
+                'hide': !this.isActive(i)
+            })
+
             images.push(
-                <div className={classes}>
+                <li key={i} className={classes}>
                     <h3 className="image-title">{image.title}</h3>
                     <img src={image.src} />
                 </li>
             )
         })
+
         return (
             <div>
-                <i className="fa fa-chevron-left left"></i>
-                <div className="images-container">{ images }</div>
-                <i className="fa fa-chevron-right right"></i>
+                <i onClick={self.handleLeftClick.bind(self)}
+                   className="fa fa-chevron-left left"></i>
+                <ul className="images-container">{ images }</ul>
+                <i onClick={self.handleRightClick.bind(self)}
+                   className="fa fa-chevron-right right"></i>
             </div>
         )
     }
