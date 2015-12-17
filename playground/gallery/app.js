@@ -36,20 +36,28 @@ class Gallery extends Component {
         this.state = {
             currentImg: 0
         }
+
+    }
+
+    galleryLength() {
+        return this.props.images.length
+
     }
 
     handleLeftClick () {
-        this.setState({
-            currentImg: this.state.currentImg - 1
-        })
-        console.log('clicked')
+        if ( this.state.currentImg > 0 ) {
+            this.setState({
+                currentImg: this.state.currentImg - 1
+            })
+        }
     }
 
     handleRightClick () {
-        this.setState({
-            currentImg: this.state.currentImg + 1
-        })
-        console.log('right clicked: ', this.state.currentImg)
+        if ( this.state.currentImg < this.galleryLength() - 1 ) {
+            this.setState({
+                currentImg: this.state.currentImg + 1
+            })
+        }
     }
 
     isActive(i) {
