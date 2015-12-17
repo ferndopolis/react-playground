@@ -24,7 +24,7 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <Gallery loop={true} images={this.imagesSrc} />
+                <Gallery images={this.imagesSrc} />
             </div>
         )
     }
@@ -115,5 +115,12 @@ class Gallery extends Component {
         )
     }
 }
+
+Gallery.propTypes = {
+    loop: React.PropTypes.bool,
+    images: React.PropTypes.array.isRequired
+}
+
+Gallery.defaultProps = { loop: false }
 
 React.render(<App/>, document.getElementById('example'));
