@@ -83,7 +83,7 @@ class Gallery extends Component {
             images.push(
                 <li key={i} className={classes}>
                     <h3 className="image-title">{image.title}</h3>
-                    <img src={image.src} />
+                    <img className="centered" src={image.src} />
                 </li>
             )
         })
