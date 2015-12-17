@@ -24,7 +24,7 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <Gallery images={this.imagesSrc} />
+                <Gallery loop={true} images={this.imagesSrc} />
             </div>
         )
     }
@@ -44,19 +44,35 @@ class Gallery extends Component {
 
     }
 
+    hasLowerBound() {
+        return this.state.currentImg > 0
+    }
+
     handleLeftClick () {
-        if ( this.state.currentImg > 0 ) {
+        if ( this.hasLowerBound() ) {
             this.setState({
                 currentImg: this.state.currentImg - 1
             })
+        } else {
+            if ( this.props.loop ) {
+                this.setState({ currentImg: this.galleryLength() - 1 })
+            }
         }
     }
 
+    hasUpperBound() {
+        return this.state.currentImg < this.galleryLength() - 1
+    }
+
     handleRightClick () {
-        if ( this.state.currentImg < this.galleryLength() - 1 ) {
-            this.setState({
-                currentImg: this.state.currentImg + 1
-            })
+        if ( this.hasUpperBound() ) {
+            this.setState({ currentImg: this.state.currentImg + 1 })
+        } else {
+            // has hit the upper limit
+            if ( this.props.loop ) {
+                // go back to first image
+                this.setState({ currentImg: 0})
+            }
         }
     }
 
