@@ -1,5 +1,3 @@
-require("font-awesome-webpack")
-
 import classnames from 'classnames'
 import React, {Component} from 'react'
 
@@ -78,11 +76,11 @@ class Gallery extends Component {
 
         return (
             <div>
-                <i onClick={self.handleLeftClick.bind(self)}
-                   className="fa fa-chevron-left left"></i>
+                <button onClick={self.handleLeftClick.bind(self)}
+                   className="left">-</button>
                 <ul className="images-container">{ images }</ul>
-                <i onClick={self.handleRightClick.bind(self)}
-                   className="fa fa-chevron-right right"></i>
+                <button onClick={self.handleRightClick.bind(self)}
+                   className="right">-</button>
             </div>
         )
     }
