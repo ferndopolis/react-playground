@@ -1,6 +1,7 @@
 require("./app.less")
 
 import React, {Component} from 'react'
+import ReactDOM from 'react-dom'
 import Gallery from './Gallery'
 
 class App extends Component {
@@ -29,4 +30,4 @@ class App extends Component {
     }
 }
 
-React.render(<App/>, document.getElementById('example'));
+ReactDOM.render(<App/>, document.getElementById('example'));
