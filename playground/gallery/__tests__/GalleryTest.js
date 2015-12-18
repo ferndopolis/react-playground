@@ -51,4 +51,61 @@ describe("Gallery", () => {
             expect(gallery.galleryLength()).toBe(3);
         });
     });
+
+    describe("click next item", () => {
+
+        it("should move to the next item", () => {
+            TestUtils.Simulate.click(
+                TestUtils.findRenderedDOMComponentWithClass(gallery, 'right')
+            );
+            expect(gallery.state.currentImg).toBe(1);
+        });
+
+        it("when last item should not change state", () => {
+            gallery.state.currentImg = 2
+            TestUtils.Simulate.click(
+                TestUtils.findRenderedDOMComponentWithClass(gallery, 'right')
+            );
+            expect(gallery.state.currentImg).toBe(2);
+        });
+
+        describe("when loop is true", () => {
+            it("on last item should loop to first", () => {
+                var galleryWithLoop = TestUtils.renderIntoDocument(<Gallery loop={true} images={ images }/>);
+                galleryWithLoop.state.currentImg = 2
+                TestUtils.Simulate.click(
+                    TestUtils.findRenderedDOMComponentWithClass(galleryWithLoop, 'right')
+                );
+                expect(galleryWithLoop.state.currentImg).toBe(0);
+            });
+        });
+    });
+
+    describe("click prev item", () => {
+
+        it("should move to the prev item", () => {
+            gallery.state.currentImg = 1
+            TestUtils.Simulate.click(
+                TestUtils.findRenderedDOMComponentWithClass(gallery, 'left')
+            );
+            expect(gallery.state.currentImg).toBe(0);
+        });
+
+        it("when first item should not change state", () => {
+            TestUtils.Simulate.click(
+                TestUtils.findRenderedDOMComponentWithClass(gallery, 'left')
+            );
+            expect(gallery.state.currentImg).toBe(0);
+        });
+
+        describe("when loop is true", () => {
+            it("on first item should loop to last", () => {
+                var galleryWithLoop = TestUtils.renderIntoDocument(<Gallery loop={true} images={ images }/>);
+                TestUtils.Simulate.click(
+                    TestUtils.findRenderedDOMComponentWithClass(galleryWithLoop, 'left')
+                );
+                expect(galleryWithLoop.state.currentImg).toBe(2);
+            });
+        });
+    });
 });
