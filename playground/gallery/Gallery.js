@@ -111,7 +111,7 @@ class Gallery extends Component {
             <div>
                 <button onClick={self.handleLeftClick.bind(self)}
                    className="left">-</button>
-                <ul className="images-container">{ images }</ul>
+                <ul className="item-list" ref="itemList">{ images }</ul>
                 <button onClick={self.handleRightClick.bind(self)}
                    className="right">-</button>
             </div>
