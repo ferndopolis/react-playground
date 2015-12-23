@@ -54,6 +54,34 @@ class Gallery extends Component {
         }
     }
 
+    isNext(i) {
+        if ( i == this.state.currentImg ) {
+            return false;
+        }
+
+        if ( i == this.state.currentImg + 1 ) {
+            return true
+        } else if (this.props.loop && this.state.currentImg == this.galleryLength() -1 && i == 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    isPrev(i) {
+        // false if current item
+        if ( i == this.state.currentImg ) {
+            return false;
+        }
+
+        if ( i == this.state.currentImg - 1 ) {
+            return true
+        } else if (this.props.loop && this.state.currentImg == 0 && i == this.galleryLength() - 1)  {
+            return true
+        } else {
+            return false
+        }
+    }
     render() {
         var self = this
         var images = []
@@ -61,9 +89,14 @@ class Gallery extends Component {
 
         this.props.images.forEach( (image, i) => {
             var classes = classnames({
-                'image-container': true,
+                'item': true,
+                //'show': this.isActive(i),
+                //'hide': !this.isActive(i)
+                //'fade-in': this.isActive(i),
+                //'fade-out': !this.isActive(i),
                 'active': this.isActive(i),
-                'hide': !this.isActive(i)
+                'next': this.isNext(i),
+                'prev': this.isPrev(i)
             })
 
             images.push(
