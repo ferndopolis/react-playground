@@ -9,9 +9,16 @@ class Gallery extends Component {
         }
     }
 
+    componentDidMount() {
+
+        var el = this.refs.itemList;
+        el.addEventListener('touchstart', this.onSwipeStart.bind(this));
+        el.addEventListener('touchmove', this.onSwipeMove.bind(this));
+        el.addEventListener('touchend', this.onSwipeEnd.bind(this));
+    }
+
     galleryLength() {
         return this.props.images.length
-
     }
 
     hasPrevItem() {
@@ -82,6 +89,39 @@ class Gallery extends Component {
             return false
         }
     }
+
+    onSwipeStart (e) {
+        this.setState({
+            touchStart: e.touches[0].pageX,
+            swiping: true
+        })
+    }
+
+    onSwipeMove (e) {
+        e.preventDefault()
+        var delta = e.touches[0].pageX - this.state.touchStart;
+        var swipeThreshold = 10
+        if (this.state.swiping) {
+            if ( delta < -swipeThreshold) {
+                // slide to Next
+                this.setState({ swiping: false })
+                this.handleRightClick()
+            } else if ( delta > swipeThreshold ) {
+                //slide to Prev
+                this.setState({ swiping: false })
+                this.handleLeftClick()
+            }
+        }
+
+    }
+
+    onSwipeEnd (e) {
+        this.setState({
+            touchStart: null,
+            swiping: false
+        })
+    }
+
     render() {
         var self = this
         var images = []
